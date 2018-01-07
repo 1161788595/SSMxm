@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zking.dao.IMainmenuDao">
+
+
+<select id="selectMainmenu" resultType="Mainmenu" parameterType="java.lang.Integer">
+
+SELECT * FROM mainmenu WHERE mid IN ( SELECT n.mmid FROM user u LEFT JOIN  userrole n  ON  u.rid=n.rid WHERE u.rid=#{rid} )
+
+</select>
+
+<select id="selectMainmenutwo" parameterType="Mainmenu" resultType="Mainmenu">
+
+  SELECT * FROM mainmenu  WHERE mparent IN (SELECT m.mid FROM mainmenu m WHERE m.text=#{text})
+
+</select>
+
+
+</mapper>
